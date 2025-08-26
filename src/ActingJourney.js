@@ -3,9 +3,11 @@ import { Container, Typography, Grid, Card, CardMedia, CardContent, Box } from "
 import { motion } from "framer-motion";
 import tholiPrema from './tholiprema.jpg';
 import gabbarsingh from './gabbarsingh.jpg';
+import og from './og.jpg';
 const movies = [
   { img: tholiPrema, title: "Tholi Prema (1998)", desc: "Won the National Award for Best Feature Film." },
   { img: gabbarsingh, title: "Gabbar Singh (2012)", desc: "A massive blockbuster & cultural phenomenon." },
+   { img: og, title: "OG (2025)", desc: "Upcoming movie directed by Sujeeth" }
 ];
 
 export default function ActingJourney() {
