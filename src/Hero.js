@@ -22,6 +22,105 @@ export default function Hero() {
     setCount((prev) => prev + 1);
   };
 
+  // Violent floating words with intense fire effects
+  const ViolentFloatingWord = ({ word, top, left, delay }) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, y: 100 }}
+        animate={{ 
+          opacity: [0, 1, 0.9, 0],
+          y: [100, -100, -200, -300],
+          x: [0, 20, -30, 10],
+          scale: [0.5, 1.3, 1.2, 0.8],
+          rotate: [0, 5, -8, 12]
+        }}
+        transition={{ 
+          duration: 12 + Math.random() * 6,
+          repeat: Infinity,
+          delay: delay,
+          ease: "easeInOut"
+        }}
+        style={{
+          position: "absolute",
+          top: `${top}%`,
+          left: `${left}%`,
+          color: "#ff1744",
+          fontSize: "3rem",
+          fontWeight: "900",
+          textTransform: "uppercase",
+          textShadow: `
+            0 0 5px #fff,
+            0 0 10px #ff1744,
+            0 0 15px #ff1744,
+            0 0 20px #ff1744,
+            0 0 35px #ff1744,
+            0 0 40px #ff1744,
+            2px 2px 2px rgba(0, 0, 0, 0.8)
+          `,
+          zIndex: 0,
+          pointerEvents: "none",
+          fontFamily: "'Arial Black', sans-serif",
+          letterSpacing: "2px",
+        }}
+      >
+        {word}
+        {/* Intense fire effect particles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 0, x: 0 }}
+            animate={{ 
+              opacity: [0, 1, 0],
+              y: [0, -30 - (i * 15)],
+              x: [0, (i % 2 === 0 ? 1 : -1) * (15 + Math.random() * 20)]
+            }}
+            transition={{ 
+              duration: 1.5 + Math.random() * 1.5,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "50%",
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              backgroundColor: i % 3 === 0 ? "#ff1744" : i % 3 === 1 ? "#ff8a80" : "#ff5252",
+              boxShadow: "0 0 12px rgba(255, 23, 68, 0.9)",
+            }}
+          />
+        ))}
+        
+        {/* Additional violent flame effects */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ 
+            opacity: [0, 0.8, 0.4, 0],
+            scale: [0.8, 1.5, 1.2, 0.9],
+          }}
+          transition={{ 
+            duration: 2 + Math.random(),
+            repeat: Infinity,
+            delay: Math.random() * 2,
+          }}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "120%",
+            height: "120%",
+            background: "radial-gradient(ellipse at center, rgba(255, 23, 68, 0.4) 0%, transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(5px)",
+            zIndex: -1,
+          }}
+        />
+      </motion.div>
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -35,6 +134,11 @@ export default function Hero() {
         p: 2,
         position: "relative",
         overflow: "hidden",
+      }}
+      onMouseMove={(e) => {
+        // Update CSS variables for spotlight effect
+        document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--y', `${e.clientY}px`);
       }}
     >
       {/* Overlay for spotlight effect */}
@@ -62,6 +166,18 @@ export default function Hero() {
         }}
       />
 
+      {/* Violent floating words with intense fire effects */}
+      <ViolentFloatingWord word="OG" top={15} left={5} delay={0} />
+      <ViolentFloatingWord word="FIRESTORM" top={75} left={85} delay={2} />
+      <ViolentFloatingWord word="KALYAN" top={35} left={65} delay={4} />
+      <ViolentFloatingWord word="OG" top={65} left={15} delay={6} />
+      <ViolentFloatingWord word="FIRESTORM" top={25} left={75} delay={8} />
+      <ViolentFloatingWord word="KALYAN" top={85} left={35} delay={10} />
+      
+      {/* Additional POWER STAR text elements */}
+      <ViolentFloatingWord word="POWER STAR" top={10} left={50} delay={1} />
+
+
       {/* Title */}
       <motion.div
         initial={{ opacity: 0, y: -100 }}
@@ -75,6 +191,8 @@ export default function Hero() {
             fontWeight: "bold",
             color: "#fff",
             textShadow: "0px 0px 20px rgba(255,23,68,0.9)",
+            fontFamily: "'Arial Black', sans-serif",
+            letterSpacing: "1px",
           }}
         >
           Happy Birthday 🎂
@@ -95,9 +213,33 @@ export default function Hero() {
             fontWeight: "bold",
             color: "#ff1744",
             textShadow: "0px 0px 20px rgba(0,0,0,0.9)",
+            fontFamily: "'Arial Black', sans-serif",
+            letterSpacing: "2px",
           }}
         >
           Power Star Pawan Kalyan
+        </Typography>
+      </motion.div>
+
+      {/* Additional text: "YOU BETTER REMEMBER HIS NAME" */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, delay: 1.2 }}
+        style={{ position: "relative", zIndex: 1 }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            mt: 2,
+            fontWeight: "bold",
+            color: "#fff",
+            textShadow: "0px 0px 15px rgba(255,23,68,0.8)",
+            fontFamily: "'Arial Black', sans-serif",
+            letterSpacing: "3px",
+          }}
+        >
+         
         </Typography>
       </motion.div>
 
@@ -118,6 +260,9 @@ export default function Hero() {
               px: 3,
               py: 1,
               borderRadius: "12px",
+              fontWeight: "bold",
+              textShadow: "0px 0px 10px rgba(0,0,0,0.3)",
+              fontFamily: "'Arial Black', sans-serif",
             }}
           >
             🎉 Celebrate
